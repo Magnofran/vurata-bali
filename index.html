@@ -5854,7 +5854,14 @@ document.addEventListener('DOMContentLoaded', () => {
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
 
-<!-- Vurata Market link: sits beside the language and theme buttons -->
+<style>
+        /* phones: pull the wordmark left (same size) and tighten the Market pill so they never touch */
+        @media (max-width: 480px) {
+            .main-hero > nav { padding-left: 0.75rem !important; }
+            #marketLink { padding: 0 12px !important; letter-spacing: 0.2em !important; font-size: 10px !important; }
+        }
+    </style>
+    <!-- Vurata Market link: sits beside the language and theme buttons -->
     <a href="https://market.vurata.com" id="marketLink" style="
         position: fixed;
         top: max(20px, calc(env(safe-area-inset-top) + 20px));
