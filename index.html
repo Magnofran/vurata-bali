@@ -3715,6 +3715,10 @@ function expandTerminal(){
                     <svg class="social-icon" style="fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     hello@vurata.com
                 </a>
+                <a href="https://market.vurata.com">
+                    <svg class="social-icon" style="fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    Vurata Market &middot; Groceries delivered across Bali
+                </a>
             </div>
 	    
 	    <div class="social-links">
@@ -5842,6 +5846,29 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+
+<!-- Vurata Market link: sits beside the language and theme buttons -->
+    <a href="https://market.vurata.com" id="marketLink" style="
+        position: fixed;
+        top: max(20px, calc(env(safe-area-inset-top) + 20px));
+        right: 128px;
+        height: 44px;
+        padding: 0 18px;
+        display: flex;
+        align-items: center;
+        background-color: var(--surface);
+        color: var(--text-dark);
+        border: 1px solid var(--border-light);
+        border-radius: 22px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        transition: border-color 0.2s;
+    " onmouseover="this.style.borderColor='var(--accent-vibrant)'" onmouseout="this.style.borderColor='var(--border-light)'">Market</a>
 
 <!-- Apex Upgrade: Dark Mode Toggle -->
     <button id="themeToggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" style="
