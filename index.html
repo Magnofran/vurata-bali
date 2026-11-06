@@ -5573,6 +5573,24 @@ if (carSeatsCol) {
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             const refCode = urlParams.get('ref');
+            // Where a guest first came from (?src=threads|facebook|instagram), kept 30 days so a later visit still counts.
+            const SRC_NAME = { threads: 'Threads', facebook: 'Facebook', instagram: 'Instagram' };
+            let srcName = '';
+            try {
+                const src = urlParams.get('src');
+                if (SRC_NAME[src]) localStorage.setItem('vurata-src', src + '|' + Date.now());
+                const [k, at] = String(localStorage.getItem('vurata-src') || '').split('|');
+                if (SRC_NAME[k] && Date.now() - Number(at) < 30 * 864e5) srcName = SRC_NAME[k];
+            } catch (e) {}
+            if (urlParams.has('src')) {
+                urlParams.delete('src');
+                const rest = urlParams.toString();
+                history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
+            }
+            if (!refCode && srcName) {
+                const attrInput = document.getElementById('attribution');
+                if (attrInput && !attrInput.value) attrInput.value = 'Found us on ' + srcName;
+            }
             if (refCode) {
                 const attrInput = document.getElementById('attribution');
                 if (attrInput) {
