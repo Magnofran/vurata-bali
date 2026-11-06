@@ -5573,11 +5573,16 @@ if (carSeatsCol) {
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             const refCode = urlParams.get('ref');
-            // Where a guest first came from (?src=threads|facebook|instagram), kept 30 days so a later visit still counts.
+            // Where a guest first came from, kept 30 days so a later visit still counts. Links stay plain:
+            // the app they tapped from is read from the referrer, and ?src=threads|facebook|instagram still works.
             const SRC_NAME = { threads: 'Threads', facebook: 'Facebook', instagram: 'Instagram' };
             let srcName = '';
             try {
-                const src = urlParams.get('src');
+                let src = urlParams.get('src');
+                if (!src) {
+                    const h = document.referrer ? new URL(document.referrer).hostname : '';
+                    src = /(^|\.)threads\.(net|com)$/.test(h) ? 'threads' : /(^|\.)(facebook|fb)\.com$/.test(h) ? 'facebook' : /(^|\.)instagram\.com$/.test(h) ? 'instagram' : '';
+                }
                 if (SRC_NAME[src]) localStorage.setItem('vurata-src', src + '|' + Date.now());
                 const [k, at] = String(localStorage.getItem('vurata-src') || '').split('|');
                 if (SRC_NAME[k] && Date.now() - Number(at) < 30 * 864e5) srcName = SRC_NAME[k];
